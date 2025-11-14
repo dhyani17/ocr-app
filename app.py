@@ -8,6 +8,8 @@ import io
 import numpy as np
 import google.generativeai as genai
 import os
+from dotenv import load_dotenv
+load_dotenv()
 
 # -------------------- CONFIG --------------------
 # ✅ Path to Tesseract
@@ -219,4 +221,5 @@ if uploaded_file:
 
 else:
     st.info("⬆ Upload a form to get started.")
+
 
