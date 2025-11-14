@@ -7,6 +7,8 @@ from pypdf import PdfReader
 import io
 import numpy as np
 import google.generativeai as genai
+import os
+from dotenv import load_dotenv
 
 # -------------------- CONFIG --------------------
 # ✅ Path to Tesseract
@@ -14,7 +16,9 @@ pytesseract.pytesseract.tesseract_cmd = "/usr/bin/tesseract"
 
 
 # ✅ Gemini API Key
-genai.configure(api_key="AIzaSyAvqbnEjvhz0U1Plimhx969HmpoGCFnRTQ")   # ← Replace with your key
+load_dotenv()  # loads the .env file
+genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
+
 
 # -------------------- OCR FUNCTIONS --------------------
 
