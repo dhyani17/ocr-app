@@ -2,7 +2,6 @@ FROM python:3.13-slim
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-# Install system dependencies (Tesseract + libs for cv2)
 RUN apt-get update && apt-get install -y \
     tesseract-ocr \
     tesseract-ocr-eng \
@@ -16,9 +15,14 @@ WORKDIR /app
 
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
-
 COPY . .
 
-# Set the ENTRYPOINT with python -c so we don't use bash
-ENTRYPOINT ["python3", "-c", "import os, subprocess; port=os.getenv('PORT','8080'); subprocess.run(['streamlit','run','app.py','--server.port='+port,'--server.address=0.0.0.0','--server.headless=true'] )"]
+EXPOSE 8080
 
+# Run using Python (not shell) so env PORT becomes integer correctly
+CMD ["python3", "-u", "-c", "\
+import os, subprocess; \
+port = os.getenv('PORT', '8080'); \
+print('Running Streamlit on port=' + port); \
+subprocess.run(['streamlit', 'run', 'app.py', '--server.port=' + port, '--server.address=0.0.0.0']) \
+"]
