@@ -20,4 +20,5 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # Set the ENTRYPOINT with python -c so we don't use bash
-ENTRYPOINT ["python3", "-c", "import os; import subprocess; port=os.getenv('PORT','7860'); subprocess.run(['streamlit','run','app.py','--server.port='+port,'--server.address=0.0.0.0'])"]
+ENTRYPOINT ["python3", "-c", "import os, subprocess; port=os.getenv('PORT','8080'); subprocess.run(['streamlit','run','app.py','--server.port='+port,'--server.address=0.0.0.0','--server.headless=true'] )"]
+
