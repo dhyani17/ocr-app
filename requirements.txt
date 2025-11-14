@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+python-dotenv
+pillow
+opencv-python
+numpy
+pypdf
+pytesseract
+google-generativeai
+streamlit
