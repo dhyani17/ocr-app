@@ -8,7 +8,6 @@ import io
 import numpy as np
 import google.generativeai as genai
 import os
-from dotenv import load_dotenv
 
 # -------------------- CONFIG --------------------
 # ✅ Path to Tesseract
@@ -16,7 +15,7 @@ pytesseract.pytesseract.tesseract_cmd = "/usr/bin/tesseract"
 
 
 # ✅ Gemini API Key
-load_dotenv()  # loads the .env file
+# loads the .env file
 genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 
 
@@ -220,3 +219,4 @@ if uploaded_file:
 
 else:
     st.info("⬆ Upload a form to get started.")
+
