@@ -15,14 +15,14 @@ WORKDIR /app
 
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
+
 COPY . .
 
 EXPOSE 8080
 
-# Run using Python (not shell) so env PORT becomes integer correctly
 CMD ["python3", "-u", "-c", "\
 import os, subprocess; \
 port = os.getenv('PORT', '8080'); \
-print('Running Streamlit on port=' + port); \
-subprocess.run(['streamlit', 'run', 'app.py', '--server.port=' + port, '--server.address=0.0.0.0']) \
+print('Running on', port); \
+subprocess.run(['streamlit','run','app.py','--server.port='+port,'--server.address=0.0.0.0']) \
 "]
